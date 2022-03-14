@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600;700&display=swap');
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, 'Raleway', Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+main {
+    min-height: 86vh;
+    display: flex;
+    justify-content: center;
+
+}
+
+.layout {
+    /*background-color: #fafafa;*/
+}
+
+.add-product__paper {
+    max-width: 720px;
+    width: 90vw;
+    min-height: 20%;
+    margin-top: 10%;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
