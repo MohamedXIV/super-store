@@ -15,22 +15,22 @@ export default function Product({data}) {
             setImage("/images/book_light_64.png");
         } else if (data.size != null) {
             // setSpecialElement(<div>Weight: {data.size}</div>);
-            setSpecialElement(<>Size: {data.size}</>);
+            setSpecialElement(<>Size: <strong>{data.size}</strong> MB</>);
             setImage("/images/dvd_light_64.png");
         } else {
             const dimsObj = JSON.parse(data.dimensions);
             //console.log(dimsObj);
-            setSpecialElement(<>Dimensions:
-                Typ{dimsObj.h}x
+            setSpecialElement(<>Dimensions: {dimsObj.h}x
                 {dimsObj.w}x
                 {dimsObj.l}</>)
             setImage("/images/furniture_light_64.png");
         }
     }
 
-    // function handleDelete(e, d){
-    //     deleteContext.setDeleteList({...deleteContext.deleteList,data[id]: e.target.checked})
-    // }
+    function handleDelete(e){
+        // const tempObj = {[data.id]: }
+        deleteContext.setDeleteList(prevState => ({...prevState,[data.id]: e}))
+    }
 
     useEffect(() => {
         handleDifferences();
@@ -47,7 +47,7 @@ export default function Product({data}) {
                   onMouseLeave={() => setIsRaised(false)}>
                 {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
                 <CardContent sx={{paddingBottom: "0px", padding: "0px"}}>
-                    <Checkbox checked={deleteContext.delteList} onChange={(e) => deleteContext.deleteList[data.id] = e.target.checked} sx={{visibility: deleteContext.deleteEnabled? "visible": "hidden"}}/>
+                    <Checkbox checked={deleteContext.delteList} onChange={(e) => handleDelete(e.target.checked)} sx={{visibility: deleteContext.deleteEnabled? "visible": "hidden"}}/>
                     <Typography align="center" sx={{fontSize: 14}}
                                 color="text.secondary"
                                 gutterBottom>

@@ -9,10 +9,6 @@ export default function Layout({children, theme, setTheme, darkThemeOn}) {
     const [deleteEnabled, setDeleteEnabled] = useState(false);
     const [deleteList, setDeleteList] = useState({});
 
-    useEffect(() => {
-        console.log(deleteList)
-    }, [deleteList]);
-
     return (
         <>
             <GlobalContext.Provider

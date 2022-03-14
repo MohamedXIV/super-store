@@ -5,7 +5,7 @@ import {Box, Container} from '@mui/material';
 import Product from '../components/Product';
 import endpoints from "../data/endpoints";
 import {GlobalContext} from "../components/Layout";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 
 
 async function retrieveData(url) {
@@ -27,7 +27,7 @@ export async function getStaticProps() {
 
 
 export default function Home({data}) {
-    const packedData = data;
+    const [packedData, setPackedData] = useState(data);
     const globalContext = useContext(GlobalContext);
     const tempDeleteObj = {};
 
@@ -36,6 +36,10 @@ export default function Home({data}) {
         globalContext.setDeleteList(tempDeleteObj);
         console.log(globalContext.deleteList);
     }, [packedData]);
+
+    // useEffect(() => {
+    //     console.log("deleteList Changed");
+    // }, [globalContext.deleteList])
 
     return (
         <Container maxWidth={"lg"}>
@@ -49,8 +53,6 @@ export default function Home({data}) {
 
 
             }
-            {/*<Product productName={data[0].title} />*/}
-            {console.log(globalContext.deleteList)}
         </Container>
     );
 }
