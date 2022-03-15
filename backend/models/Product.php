@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: application/json; charset=utf-8');
+
 abstract class Product
 {
     // Base Properties
@@ -8,7 +10,7 @@ abstract class Product
     private float $price;
 
     // Get Products
-    public function read(PDO $conn, string $table = "products"): void
+    public function read(PDO $conn, string $table = "products")
     {
         $query = "SELECT * FROM $table ORDER BY id";
 

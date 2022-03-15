@@ -1,7 +1,7 @@
 
 
 const endpoints = {
-    "getProductsURL": "http://localhost/super-store/backend/api/getproducts.php",
+    "getProductsURL": "https://motakaml.000webhostapp.com/api/getproducts.php",
     "saveProductsURL": "http://localhost/super-store/backend/api/saveproducts.php"
 }
 

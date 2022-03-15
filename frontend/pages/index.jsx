@@ -6,19 +6,26 @@ import Product from '../components/Product';
 import endpoints from "../data/endpoints";
 import {GlobalContext} from "../components/Layout";
 import {useContext, useEffect, useState} from "react";
+import axios from "axios";
 
 
 async function retrieveData(url) {
     try {
-        const res = await fetch(url);
+        const res = await fetch(url, {headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "x-requested-with": "XMLHttpRequest"
+            }});
         return await res.json();
     } catch (err) {
+        // console.log(err.toString());
         return ["Error", err.toString()]
     }
 }
 
 export async function getStaticProps() {
     const d = await retrieveData(endpoints.getProductsURL);
+    console.log(d);
 
     return {
         props: {data: d}
@@ -42,7 +49,7 @@ export default function Home({data}) {
     // }, [globalContext.deleteList])
 
     return (
-        <Container maxWidth={"lg"}>
+        <Container maxWidth={"lg"} sx={{padding: "2%"}}>
             {packedData[0] === "Error" ?
                 <center><h3>Cannot connect to the server</h3></center> : packedData.hasOwnProperty('message') ?
                     <h2>{packedData.message}</h2> :

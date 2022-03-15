@@ -153,7 +153,7 @@ export default function AddProduct() {
                         </Select>
                     </FormControl>
                     <SubForm typeId={productType} setProductData={setSpecificData}/>
-                    <LoadingButton loading={isAddBtnLoading} type="submit" variant="contained" fullWidth>
+                    <LoadingButton loading={isAddBtnLoading} type="submit" variant="contained" id="Add" fullWidth>
                         Add
                     </LoadingButton>
                     {haltingSubmit && <p>Please check your inputs</p>}
