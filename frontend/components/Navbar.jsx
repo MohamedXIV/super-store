@@ -56,7 +56,7 @@ export default function Navbar({theme}) {
                     {router.route !== "/addproduct" &&
                         <Box sx={{width: "75%",maxWidth: "420px", display: "flex", justifyContent: 'space-around'}}>
                             <Link href={"/addproduct"}>
-                                <Button variant={"contained"} color={"primary"} sx={{
+                                <Button id="add" variant={"contained"} color={"primary"} sx={{
                                     '&:hover': {
                                         boxShadow: '0px 2px 10px ' + mainBtnShadow,
                                     },
@@ -65,7 +65,7 @@ export default function Navbar({theme}) {
                                     Add Product
                                 </Button>
                             </Link>
-                            {!layoutContext.deleteEnabled && <Button variant={"outlined"} color={"error"} onClick={toggleDelete}>Mass
+                            {!layoutContext.deleteEnabled && <Button id="delete-product-btn" variant={"outlined"} color={"error"} onClick={toggleDelete}>Mass
                                 Delete</Button>}
                             {layoutContext.deleteEnabled && <ButtonGroup variant="outlined" color={"error"}>
                                 <Button onClick={toggleDelete}>X</Button>

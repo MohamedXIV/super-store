@@ -1,4 +1,5 @@
 import {
+    Button,
     FormControl,
     InputLabel,
     MenuItem,
@@ -13,6 +14,7 @@ import types from "../data/product/types";
 import endpoints from "../data/endpoints";
 import SubForm from "../components/SubForm";
 import {useForm} from 'react-hook-form';
+import Link from 'next/link';
 
 export default function AddProduct() {
 
@@ -37,12 +39,12 @@ export default function AddProduct() {
         console.log(specificData)
     }, [specificData])
 
-     async function saveData(url, data) {
+    async function saveData(url, data) {
         try {
             const jsonData = JSON.stringify(data);
             const response = await fetch(url, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: jsonData
             })
             if (response.ok) {
@@ -50,8 +52,7 @@ export default function AddProduct() {
                 console.log(data);
                 onDataSentSuccessfully();
             }
-        }
-        catch(error) {
+        } catch (error) {
             console.error('Error:', error);
             setIsAddBtnLoading(false);
         }
@@ -66,7 +67,7 @@ export default function AddProduct() {
     //     fetch(url, requestOptions).then(console.log(data, "done"))
     // }
 
-    function onDataSentSuccessfully(){
+    function onDataSentSuccessfully() {
         console.log("Data Saved!");
         router.push("/");
     }
@@ -88,7 +89,7 @@ export default function AddProduct() {
                     if (Object.keys(specificData).length !== 0) {
                         data.price = parseFloat(data.price);
                         setIsAddBtnLoading(true)
-                        saveData(endpoints.saveProductsURL, {...data, ...specificData,"type": productType});
+                        saveData(endpoints.saveProductsURL, {...data, ...specificData, "type": productType});
                         setHaltingSubmit(false);
                     } else {
                         setHaltingSubmit(true);
@@ -147,15 +148,16 @@ export default function AddProduct() {
                                     {pT.name}
                                 </MenuItem>
                             ))}
-                            {/* <MenuItem value={"Book"} sx={{ backgroundColor: "white" }}>Book</MenuItem>
-              <MenuItem value={"DVD"}>DVD</MenuItem>
-              <MenuItem value={"Furniture"}>Furniture</MenuItem> */}
+
                         </Select>
                     </FormControl>
                     <SubForm typeId={productType} setProductData={setSpecificData}/>
                     <LoadingButton loading={isAddBtnLoading} type="submit" variant="contained" id="Add" fullWidth>
-                        Add
+                        Save
                     </LoadingButton>
+                    <Link href={"/"}>
+                        <Button size={"small"}>Cancel</Button>
+                    </Link>
                     {haltingSubmit && <p>Please check your inputs</p>}
                 </form>
             </Paper>

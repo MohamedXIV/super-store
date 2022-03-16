@@ -18,6 +18,5 @@ function getProducts()
     $conn = new Connection();
     $reader = new General();
     $reader->read($conn->pipe());
-    echo getenv('DATABASE_USERNAME');
 }
 

@@ -27,22 +27,24 @@ function saveProducts($post)
         "furniture" => 2
     );
 
+    $conn = new Connection();
+
     if (!empty($post)) {
         $productType = intval($post->type);
         switch ($productType) {
             case $productTypes['book']:
                 $book = new Book($post);
-                $book->save(Connection::pipe());
+                $book->save($conn->pipe());
                 echo "Book Data Inserted ";
                 break;
             case $productTypes['dvd']:
                 $dvd = new DVDDisk($post);
-                $dvd->save(Connection::pipe());
+                $dvd->save($conn->pipe());
                 echo "DVD data inserted";
                 break;
             case $productTypes['furniture']:
                 $furniture = new Furniture($post);
-                $furniture->save(Connection::pipe());
+                $furniture->save($conn->pipe());
 //                $furniture->logData();
                 echo " Furniture data inserted";
                 break;
