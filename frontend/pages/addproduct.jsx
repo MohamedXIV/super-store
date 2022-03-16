@@ -58,29 +58,11 @@ export default function AddProduct() {
         }
     }
 
-    // function saveData(url, data){
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data)
-    //     };
-    //     fetch(url, requestOptions).then(console.log(data, "done"))
-    // }
-
     function onDataSentSuccessfully() {
         console.log("Data Saved!");
         router.push("/");
     }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     const product = {sku, price, ...specificData};
-    //     console.log(product);
-    // }
-
-    // const res = useMemo(() => {
-    //   pro
-    // }, [productType])
 
     return (
         <div>
@@ -139,12 +121,13 @@ export default function AddProduct() {
                             value={productType}
                             onChange={(e) => {
                                 setProductType(e.target.value);
+                                console.log(e.target.label)
                                 setSpecificData({});
                             }}
                             fullWidth
                         >
                             {productTypes.map((pT) => (
-                                <MenuItem key={pT.id} value={pT.id} id={pT.name}>
+                                <MenuItem key={pT.id} value={pT.name} id={pT.name}>
                                     {pT.name}
                                 </MenuItem>
                             ))}

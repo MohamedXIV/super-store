@@ -70,7 +70,7 @@ export default function Navbar({theme}) {
                             {layoutContext.deleteEnabled && <ButtonGroup variant="outlined" color={"error"}>
                                 <Button onClick={toggleDelete}>X</Button>
                                 <Button disabled={!couldDelete()} variant="outlined" startIcon={<DeleteIcon/>}
-                                        disableElevation>Delete</Button>
+                                        disableElevation>MASS DELETE</Button>
                             </ButtonGroup>}
                             <MaterialUISwitch checked={layoutContext.darkThemeOn} onChange={() => layoutContext.setTheme(!layoutContext.darkThemeOn)} theme={theme} />
                         </Box>}
