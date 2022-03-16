@@ -57,16 +57,16 @@ export default function Navbar({theme}) {
                         <Box sx={{width: "75%",maxWidth: "420px", display: "flex", justifyContent: 'space-around'}}>
                             <Link href={"/addproduct"}>
                                 <Button id="add" variant={"contained"} color={"primary"} sx={{
+                                    width: "130px",
                                     '&:hover': {
                                         boxShadow: '0px 2px 10px ' + mainBtnShadow,
                                     },
                                     display: {xs: 'none', sm: 'block'}
                                 }}>
-                                    Add Product
+                                    ADD
                                 </Button>
                             </Link>
-                            {!layoutContext.deleteEnabled && <Button id="delete-product-btn" variant={"outlined"} color={"error"} onClick={toggleDelete}>Mass
-                                Delete</Button>}
+                            {!layoutContext.deleteEnabled && <Button id="delete-product-btn" variant={"outlined"} color={"error"} onClick={toggleDelete}>MASS DELETE</Button>}
                             {layoutContext.deleteEnabled && <ButtonGroup variant="outlined" color={"error"}>
                                 <Button onClick={toggleDelete}>X</Button>
                                 <Button disabled={!couldDelete()} variant="outlined" startIcon={<DeleteIcon/>}

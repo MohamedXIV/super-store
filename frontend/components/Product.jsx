@@ -15,7 +15,7 @@ export default function Product({data}) {
             setImage("/images/book_light_64.png");
         } else if (data.size != null) {
             // setSpecialElement(<div>Weight: {data.size}</div>);
-            setSpecialElement(<>Size: <strong>{data.size}</strong> MB</>);
+            setSpecialElement(<>Size: {data.size} MB</>);
             setImage("/images/dvd_light_64.png");
         } else {
             const dimsObj = JSON.parse(data.dimensions);
@@ -27,14 +27,14 @@ export default function Product({data}) {
         }
     }
 
-    function handleDelete(e){
+    function handleDelete(e) {
         // const tempObj = {[data.id]: }
-        deleteContext.setDeleteList(prevState => ({...prevState,[data.id]: e}))
+        deleteContext.setDeleteList(prevState => ({...prevState, [data.id]: e}))
     }
 
     useEffect(() => {
         handleDifferences();
-    },[])
+    }, [])
 
     return (
         <Box sx={{minWidth: 275}}>
@@ -43,11 +43,13 @@ export default function Product({data}) {
                 margin: "0 auto",
                 transform: "translate(0, 32px)"
             }}/>
-            <Card sx={{maxWidth: 300, borderRadius: "0.9rem", padding: "5px 5px 0 5px"}} raised={isRaised} onMouseEnter={() => setIsRaised(true)}
+            <Card sx={{maxWidth: 300, borderRadius: "0.9rem", padding: "5px 5px 0 5px"}} raised={isRaised}
+                  onMouseEnter={() => setIsRaised(true)}
                   onMouseLeave={() => setIsRaised(false)}>
                 {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
                 <CardContent sx={{paddingBottom: "0px", padding: "0px"}}>
-                    <Checkbox checked={deleteContext.delteList} onChange={(e) => handleDelete(e.target.checked)} sx={{visibility: deleteContext.deleteEnabled? "visible": "hidden"}}/>
+                    <Checkbox className={"delete-checkbox"} checked={deleteContext.delteList} onChange={(e) => handleDelete(e.target.checked)}
+                              sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}/>
                     <Typography align="center" sx={{fontSize: 14}}
                                 color="text.secondary"
                                 gutterBottom>
