@@ -36,7 +36,6 @@ export default function Navbar({theme}) {
     }
 
     function handleDelete() {
-        //console.log(layoutContext.packedData);
         layoutContext.setPackedData(prevState => {
             return prevState.filter(el => el.checked !== true)
         })
