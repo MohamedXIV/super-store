@@ -11,11 +11,13 @@ import axios from "axios";
 
 async function retrieveData(url) {
     try {
-        const res = await fetch(url, {headers: {
+        const res = await fetch(url, {
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "x-requested-with": "XMLHttpRequest"
-            }});
+            }
+        });
         return await res.json();
     } catch (err) {
         // console.log(err.toString());
@@ -34,28 +36,33 @@ export async function getStaticProps() {
 
 
 export default function Home({data}) {
-    const [packedData, setPackedData] = useState(data);
     const globalContext = useContext(GlobalContext);
-    const tempDeleteObj = {};
+    let tempDeleteArray = [];
+
 
     useEffect(() => {
-        packedData.forEach((p) => tempDeleteObj[p.id] = false);
-        globalContext.setDeleteList(tempDeleteObj);
-        console.log(globalContext.deleteList);
-    }, [packedData]);
+        if (data.length !== 0) {
+            if (true) {
+                tempDeleteArray = data.map((p) => ({...p, checked : false}));
+            }
+        }
+        globalContext.setPackedData(tempDeleteArray);
+        // packedData.forEach((p) => tempDeleteObj[p.id] = false);
+        // globalContext.setDeleteList(tempDeleteObj);
+        console.log(tempDeleteArray);
+    }, []);
 
-    // useEffect(() => {
-    //     console.log("deleteList Changed");
-    // }, [globalContext.deleteList])
 
     return (
         <Container maxWidth={"lg"} sx={{padding: "2%"}}>
-            {packedData[0] === "Error" ?
-                <center><h3>Cannot connect to the server</h3></center> : packedData.hasOwnProperty('message') ?
-                    <h2>{packedData.message}</h2> :
+            {globalContext.packedData[0] === "Error" ?
+                <center><h3>Cannot connect to the server</h3>
+                </center> : globalContext.packedData.hasOwnProperty('message') ?
+                    <h2>{globalContext.packedData.message}</h2> :
                     <Box sx={{display: "flex", justifyContent: "space-evenly", flexWrap: "wrap"}}>
-                        {packedData.map((product) =>
-                            <Product data={product} key={product.id}/>)}
+                        {globalContext.packedData.length !== 0 ?
+                            globalContext.packedData.map((product, index) =>
+                                <Product data={product} key={product.id} productIndex={index}/>) : <center>There is no data</center>}
                     </Box>
 
 

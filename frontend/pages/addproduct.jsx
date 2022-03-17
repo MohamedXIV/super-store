@@ -127,7 +127,7 @@ export default function AddProduct() {
                             fullWidth
                         >
                             {productTypes.map((pT) => (
-                                <MenuItem key={pT.id} value={pT.name} id={pT.name}>
+                                <MenuItem key={pT.id} value={pT.id} id={pT.name}>
                                     {pT.name}
                                 </MenuItem>
                             ))}

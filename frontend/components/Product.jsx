@@ -3,7 +3,7 @@ import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "./Layout";
 
 
-export default function Product({data}) {
+export default function Product({data, productIndex}) {
     const [isRaised, setIsRaised] = useState(false);
     const [image, setImage] = useState("");
     const [specialElement, setSpecialElement] = useState(<></>);
@@ -12,16 +12,14 @@ export default function Product({data}) {
     function handleDifferences() {
         if (data.weight != null) {
             setSpecialElement(<>Weight:&nbsp;
-                <Typography variant={"subtitle1"}
-                            sx={{display: "inline-block", fontWeight: "bold"}}>{data.weight}</Typography>
+                <strong>{data.weight}</strong>
             </>);
             setImage("/images/book_light_64.png");
         } else if (data.size != null) {
             setSpecialElement(<>Size:&nbsp;
-                <Typography variant={"subtitle1"}
-                            sx={{display: "inline-block", fontWeight: "bold"}}>{data.size}</Typography>
+                <strong>{data.size}</strong>
                 &nbsp;MB</>);
-            setImage("/images/dvd_light_64.png");
+            setImage("/images/dvd_64.png");
         } else {
             const dimsObj = JSON.parse(data.dimensions);
             //console.log(dimsObj);
@@ -35,7 +33,12 @@ export default function Product({data}) {
 
     function handleDelete(e) {
         // const tempObj = {[data.id]: }
-        deleteContext.setDeleteList(prevState => ({...prevState, [data.id]: e}))
+        deleteContext.setPackedData(prevState => {
+            const tempArray = [...prevState]
+            tempArray[productIndex]["checked"] = e
+            return tempArray
+        })
+        //console.log(deleteContext.packedData);
     }
 
     useEffect(() => {
@@ -54,7 +57,7 @@ export default function Product({data}) {
                   onMouseLeave={() => setIsRaised(false)}>
                 {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
                 <CardContent sx={{paddingBottom: "0px", padding: "0px"}}>
-                    <Checkbox className={"delete-checkbox"} checked={deleteContext.delteList}
+                    <Checkbox className={"delete-checkbox"} checked={deleteContext.packedData.checked}
                               onChange={(e) => handleDelete(e.target.checked)}
                     />
                     {/*sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}*/}

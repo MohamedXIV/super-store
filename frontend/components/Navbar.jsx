@@ -29,14 +29,17 @@ export default function Navbar({theme}) {
         layoutContext.setDeleteEnabled(!layoutContext.deleteEnabled);
     }
 
-    function couldDelete(){
-        // for (const [key, value] of Object.entries(layoutContext.deleteList)) {
-        //     if (value === true) {
-        //         console.log(value);
-        //         return true
-        //     } else {console.log(value); return false}
-        // }
-        return Object.values(layoutContext.deleteList).some(v=> v=== true)
+    function couldDelete() {
+
+        // Object.values(layoutContext.deleteList).some(v => v === true)
+        return layoutContext.packedData.map(el => el.checked).some(v => v === true);
+    }
+
+    function handleDelete() {
+        //console.log(layoutContext.packedData);
+        layoutContext.setPackedData(prevState => {
+            return prevState.filter(el => el.checked !== true)
+        })
     }
 
 
@@ -54,7 +57,7 @@ export default function Navbar({theme}) {
                         <Tab label={"Super Store"} sx={{color: "primary", fontSize: "1.2rem", fontWeight: "500"}}/>
                     </Link>
                     {router.route !== "/addproduct" &&
-                        <Box sx={{width: "75%",maxWidth: "420px", display: "flex", justifyContent: 'space-around'}}>
+                        <Box sx={{width: "75%", maxWidth: "420px", display: "flex", justifyContent: 'space-around'}}>
                             <Link href={"/addproduct"}>
                                 <Button id="add" variant={"contained"} color={"primary"} sx={{
                                     width: "130px",
@@ -66,18 +69,23 @@ export default function Navbar({theme}) {
                                     ADD
                                 </Button>
                             </Link>
-                            {!layoutContext.deleteEnabled && <Button id="delete-product-btn" variant={"outlined"} color={"error"} onClick={toggleDelete}>MASS DELETE</Button>}
+                            {!layoutContext.deleteEnabled &&
+                                <Button id="delete-product-btn" variant={"outlined"} color={"error"}
+                                        onClick={toggleDelete}>MASS DELETE</Button>}
                             {layoutContext.deleteEnabled && <ButtonGroup variant="outlined" color={"error"}>
                                 <Button onClick={toggleDelete}>X</Button>
                                 <Button disabled={!couldDelete()} variant="outlined" startIcon={<DeleteIcon/>}
-                                        disableElevation>DELETE</Button>
+                                        disableElevation onClick={handleDelete}>MASS DELETE</Button>
                             </ButtonGroup>}
-                            <MaterialUISwitch checked={layoutContext.darkThemeOn} onChange={() => layoutContext.setTheme(!layoutContext.darkThemeOn)} theme={theme} />
+                            <MaterialUISwitch checked={layoutContext.darkThemeOn}
+                                              onChange={() => layoutContext.setTheme(!layoutContext.darkThemeOn)}
+                                              theme={theme}/>
                         </Box>}
                 </Toolbar>
             </Container>
             <Link href={"/addproduct"}>
-                <Fab color="primary" aria-label="add" sx={{display: {sm: 'none'}, position: 'fixed', bottom: '10%', right: '10%'}}>
+                <Fab color="primary" aria-label="add"
+                     sx={{display: {sm: 'none'}, position: 'fixed', bottom: '10%', right: '10%'}}>
                     <AddIcon/>
                 </Fab>
             </Link>
