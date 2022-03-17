@@ -11,18 +11,24 @@ export default function Product({data}) {
 
     function handleDifferences() {
         if (data.weight != null) {
-            setSpecialElement(<>Weight: {data.weight}</>);
+            setSpecialElement(<>Weight:&nbsp;
+                <Typography variant={"subtitle1"}
+                            sx={{display: "inline-block", fontWeight: "bold"}}>{data.weight}</Typography>
+            </>);
             setImage("/images/book_light_64.png");
         } else if (data.size != null) {
-            // setSpecialElement(<div>Weight: {data.size}</div>);
-            setSpecialElement(<>Size: {data.size} MB</>);
+            setSpecialElement(<>Size:&nbsp;
+                <Typography variant={"subtitle1"}
+                            sx={{display: "inline-block", fontWeight: "bold"}}>{data.size}</Typography>
+                &nbsp;MB</>);
             setImage("/images/dvd_light_64.png");
         } else {
             const dimsObj = JSON.parse(data.dimensions);
             //console.log(dimsObj);
-            setSpecialElement(<>Dimensions: {dimsObj.h}x
-                {dimsObj.w}x
-                {dimsObj.l}</>)
+            setSpecialElement(<>Dimensions:&nbsp;
+                <strong>{dimsObj.h}</strong>x
+                <strong>{dimsObj.w}</strong>x
+                <strong>{dimsObj.l}</strong></>)
             setImage("/images/furniture_light_64.png");
         }
     }
@@ -48,8 +54,10 @@ export default function Product({data}) {
                   onMouseLeave={() => setIsRaised(false)}>
                 {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
                 <CardContent sx={{paddingBottom: "0px", padding: "0px"}}>
-                    <Checkbox className={"delete-checkbox"} checked={deleteContext.delteList} onChange={(e) => handleDelete(e.target.checked)}
-                              sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}/>
+                    <Checkbox className={"delete-checkbox"} checked={deleteContext.delteList}
+                              onChange={(e) => handleDelete(e.target.checked)}
+                    />
+                    {/*sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}*/}
                     <Typography align="center" sx={{fontSize: 14}}
                                 color="text.secondary"
                                 gutterBottom>
@@ -62,12 +70,9 @@ export default function Product({data}) {
                         {data.name}
                     </Typography>
                     <Typography align="center" variant="body2">
-                        {/*well meaning and kindly.*/}
-                        {/*<br/>*/}
-                        {/*{'"a benevolent smile"'}*/}
                         {specialElement}
-                        <br/>
-                        {data.id}
+                        {/*<br/>*/}
+                        {/*{data.id}*/}
                     </Typography>
                 </CardContent>
                 {/*<CardActions>*/}
