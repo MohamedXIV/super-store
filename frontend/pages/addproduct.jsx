@@ -40,16 +40,17 @@ export default function AddProduct() {
     }, [specificData])
 
     async function saveData(url, data) {
+        let jsonData = {};
+        let response;
         try {
-            const jsonData = JSON.stringify(data);
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: jsonData
-            })
+            jsonData = JSON.stringify(data);
+            response = await fetch(url, {
+              method: "POST",
+              body: jsonData
+            });
             if (response.ok) {
-                console.log(response.status);
-                console.log(data);
+                // console.log(response.status);
+                // console.log(data);
                 onDataSentSuccessfully();
             }
         } catch (error) {

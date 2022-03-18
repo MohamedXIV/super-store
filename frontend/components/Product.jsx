@@ -46,42 +46,58 @@ export default function Product({data, productIndex}) {
     }, [])
 
     return (
-        <Box sx={{minWidth: 275}}>
-            <CardMedia component="img" image={image} sx={{
-                width: "64px",
-                margin: "0 auto",
-                transform: "translate(0, 32px)"
-            }}/>
-            <Card sx={{maxWidth: 300, borderRadius: "0.9rem", padding: "5px 5px 0 5px"}} raised={isRaised}
-                  onMouseEnter={() => setIsRaised(true)}
-                  onMouseLeave={() => setIsRaised(false)}>
-                {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
-                <CardContent sx={{paddingBottom: "0px", padding: "0px"}}>
-                    <Checkbox className={"delete-checkbox"} checked={deleteContext.packedData.checked}
-                              onChange={(e) => handleDelete(e.target.checked)}
-                    />
-                    {/*sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}*/}
-                    <Typography align="center" sx={{fontSize: 14}}
-                                color="text.secondary"
-                                gutterBottom>
-                        {data.sku}
-                    </Typography>
-                    <Typography align="center" variant="h5" component="div">
-                        ${data.price}
-                    </Typography>
-                    <Typography align="center" sx={{mb: 1.5}} color="text.secondary">
-                        {data.name}
-                    </Typography>
-                    <Typography align="center" variant="body2">
-                        {specialElement}
-                        {/*<br/>*/}
-                        {/*{data.id}*/}
-                    </Typography>
-                </CardContent>
-                {/*<CardActions>*/}
-                {/*    <Button size="small">Learn More</Button>*/}
-                {/*</CardActions>*/}
-            </Card>
-        </Box>
+      <Box sx={{ minWidth: 275 }}>
+        <CardMedia
+          component="img"
+          image={image}
+          sx={{
+            width: "64px",
+            margin: "0 auto",
+            transform: "translate(0, 32px)",
+          }}
+        />
+        <Card
+          sx={{
+            maxWidth: 300,
+            borderRadius: "0.9rem",
+            padding: "5px 5px 0 5px",
+          }}
+          raised={isRaised}
+          onMouseEnter={() => setIsRaised(true)}
+          onMouseLeave={() => setIsRaised(false)}
+        >
+          {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
+          <CardContent sx={{ paddingBottom: "0px", padding: "0px" }}>
+            <Checkbox
+              className={"delete-checkbox"}
+              checked={deleteContext.packedData.checked}
+              onChange={(e) => handleDelete(e.target.checked)}
+            />
+            {/*sx={{visibility: deleteContext.deleteEnabled ? "visible" : "hidden"}}*/}
+            <Typography
+              align="center"
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {data.sku}
+            </Typography>
+            <Typography align="center" variant="h5" component="div">
+              ${data.price}
+            </Typography>
+            <Typography align="center" sx={{ mb: 1.5 }} color="text.secondary">
+              {data.name}
+            </Typography>
+            <Typography align="center" variant="body2">
+              {specialElement}
+              {/*<br/>*/}
+              {/*{data.id}*/}
+            </Typography>
+          </CardContent>
+          {/*<CardActions>*/}
+          {/*    <Button size="small">Learn More</Button>*/}
+          {/*</CardActions>*/}
+        </Card>
+      </Box>
     );
 }
