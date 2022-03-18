@@ -73,7 +73,7 @@ export default function Navbar({theme}) {
                                         onClick={toggleDelete}>MASS DELETE</Button>}
                             {layoutContext.deleteEnabled && <ButtonGroup variant="outlined" color={"error"}>
                                 <Button onClick={toggleDelete}>X</Button>
-                                <Button disabled={!couldDelete()} variant="outlined" startIcon={<DeleteIcon/>}
+                                <Button disabled={false} variant="outlined" startIcon={<DeleteIcon/>}
                                         disableElevation onClick={handleDelete}>MASS DELETE</Button>
                             </ButtonGroup>}
                             <MaterialUISwitch checked={layoutContext.darkThemeOn}
