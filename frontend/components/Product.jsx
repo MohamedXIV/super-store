@@ -21,6 +21,7 @@ export default function Product({data, productIndex}) {
                 &nbsp;MB</>);
             setImage("/images/dvd_64.png");
         } else {
+          if (data.length === 0) return;
             const dimsObj = JSON.parse(data.dimensions);
             //console.log(dimsObj);
             setSpecialElement(<>Dimensions:&nbsp;
@@ -69,7 +70,7 @@ export default function Product({data, productIndex}) {
           {/*<Box sx={{maxWidth: "5rem", height: "5rem", backgroundColor: "pink", margin: "0 auto", transform: "translate(0, -20px)"}}>Test</Box>*/}
           <CardContent sx={{ paddingBottom: "0px", padding: "0px" }}>
             <Checkbox
-              className={"delete-checkbox"}
+              className="delete-checkbox"
               checked={deleteContext.packedData.checked}
               onChange={(e) => handleDelete(e.target.checked)}
             />

@@ -1,10 +1,12 @@
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
 
 export default function Footer(){
     return (
-        <Box>
-            <center><h4>@2022 All rights reserved</h4></center>
-        </Box>
-    )
+      <Box>
+        <center>
+          <Typography variant="subtitle1" sx={{marginTop: "12px"}}>©2022 Scandiweb Test Assignment</Typography>
+        </center>
+      </Box>
+    );
 }

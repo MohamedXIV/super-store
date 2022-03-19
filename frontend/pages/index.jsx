@@ -25,7 +25,7 @@ async function retrieveData(url) {
     }
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const d = await retrieveData(endpoints.getProductsURL);
     console.log(d);
 
